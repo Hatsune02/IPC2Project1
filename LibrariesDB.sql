@@ -1,7 +1,7 @@
-drop database if exists project1;
-create database project1;
-show databases;
-use project1;
+drop database if exists librariesDB;
+create database librariesDB;
+-- show databases;
+use librariesDB;
 drop table if exists admins;
 create table admins(
 	id int auto_increment,
@@ -16,9 +16,10 @@ insert into admins(id,admin_name,username,admin_password,email)
 values
 ('1','Administrador1','admin1','123','example1@email.com'),
 ('2','Administrador2','admin2','123','example2@email.com');
+/*
 insert into admins(admin_name,username,admin_password,email)
 values ('Pancho','pan','123','pancho@email.com');
-
+*/
 drop table if exists carriers;
 create table carriers(
 	id int auto_increment,
@@ -28,6 +29,7 @@ create table carriers(
     email varchar(50) not null unique,
     primary key(id)
 );
+
 insert into carriers(id,carrier_name,username,carrier_password,email)
 values
 ('1','tranportista1','carrier1','123','example1@email.com');
@@ -51,11 +53,12 @@ create table categories(
     category_description varchar(200) not null,
     primary key(id)
 );
+/*
 insert into categories(id,category_name,category_description)
 values
 ('1','Categoria 1','Descripcion cat 1'),
 ('2','Categoria 2','Descripcion cat 2');
-
+*/
 drop table if exists books;
 create table books(
 	isbn int auto_increment,
@@ -66,13 +69,14 @@ create table books(
     foreign key(category) references categories(id),
     primary key(isbn)
 );
+/*
 insert into books(isbn,book_name,price,category,author)
 values
 ('1','libro1','10.00','1','jhon'),
 ('2','libro2','10.00','1','jhon'),
 ('3','libro3','10.00','2','jhon'),
 ('4','libro4','10.00','1','jhon');
-
+*/
 drop table if exists libraries;
 create table libraries(
 	id int auto_increment,
@@ -80,12 +84,13 @@ create table libraries(
     address varchar(100) not null unique,
     primary key(id)
 );
+/*
 insert into libraries(id,library_name,address)
 values
 ('1','libreria1','xela'),
 ('2','libreria2','toto'),
 ('3','libreria3','ciudad');
-
+*/
 drop table if exists existing_books;
 create table existing_books(
 	library int not null,
@@ -95,6 +100,7 @@ create table existing_books(
     foreign key (book) references books(isbn),
     primary key (library,book)
 );
+/*
 insert into existing_books(library,book,existence)
 values
 ('1','1','5'),
@@ -103,7 +109,7 @@ values
 ('2','2','1'),
 ('2','3','11'),
 ('3','3','9');
-
+*/
 drop table if exists receptionists;
 create table receptionists(
 	id int auto_increment,
@@ -115,10 +121,11 @@ create table receptionists(
     foreign key(library) references libraries(id),
     primary key(id)
 );
+/*
 insert into receptionists(id,receptionist_name,username,receptionist_password,email,library)
 values
 ('1','recepcionista1','recep1','123','example1@example','1');
-
+*/
 drop table if exists loan_applications;
 create table loan_applications(
 	id int auto_increment,
@@ -167,10 +174,11 @@ create table transport_between_libraries(
     foreign key(carrier) references carriers(id),
     primary key(id)
 );
+/*
 insert into transport_between_libraries(id,library,receptionist,carrier,state)
 values
 ('1','1','1','1','estado malo');
-
+*/
 drop table if exists details_transport;
 create table details_transport(
 	transport_between_library int not null,
@@ -180,7 +188,7 @@ create table details_transport(
     foreign key(book) references books(isbn),
     primary key(transport_between_library,book)
 );
-insert into details_transport(transport_between_library,book,units)
+/*insert into details_transport(transport_between_library,book,units)
 values
 ('1','1','3');
 
@@ -199,7 +207,7 @@ join transport_between_libraries
   on details_transport.transport_between_library = transport_between_libraries.id
 join existing_books
   on existing_books.library = transport_between_libraries.library;
-
+*/
 /*constraint check_books
 	check (existing_books.existence<units)*/
 /*
