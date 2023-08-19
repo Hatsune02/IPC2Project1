@@ -30,9 +30,9 @@ create table carriers(
     primary key(id)
 );
 
-insert into carriers(id,carrier_name,username,carrier_password,email)
+insert into carriers(carrier_name,username,carrier_password,email)
 values
-('1','tranportista1','carrier1','123','example1@email.com');
+('tranportista1','carrier1','123','example1@email.com');
 
 drop table if exists final_users;
 create table final_users(
@@ -42,11 +42,15 @@ create table final_users(
     user_password varchar(50) not null,
     email varchar(50) not null unique,
     balance decimal(10,2) not null,
-    ban boolean default false,
+    ban boolean default 0,
+    premium boolean default 0,
     primary key(id)
 );
-
+insert into final_users(user_name,username,user_password,email,balance)
+values
+('Usuario1','user1','123','example@email.com',250.5);
 drop table if exists categories;
+
 create table categories(
 	id int auto_increment,
     category_name varchar(100) not null,
@@ -167,7 +171,7 @@ create table transport_between_libraries(
     library int not null,
     receptionist int not null,
     carrier int not null,
-    -- transport_date date not null,
+    transport_date date not null,
     state varchar(20) not null,
     foreign key(library) references libraries(id),
     foreign key(receptionist) references receptionists(id),
