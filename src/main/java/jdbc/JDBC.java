@@ -1,3 +1,5 @@
+package jdbc;
+
 import java.sql.*;
 
 public class JDBC {
@@ -5,13 +7,17 @@ public class JDBC {
     String username = "root";
     String password = "root";
     Connection connection;
-    Statement statement;
+    public Statement statement;
     //ResultSet es para mostrar
-    ResultSet resultSetAdmin, resultSetCarrier;
+    public ResultSet resultSet;
     //PreparedStatement
-    PreparedStatement preparedStatement;
+    public PreparedStatement preparedStatement;
 
     public JDBC(){
+        
+    }
+    
+    public void show(){
         connection = null;
         try {
             //connection = DriverManager.getConnection(url,username,password);
@@ -20,31 +26,31 @@ public class JDBC {
             //add();
             //update();
             //delete();
-            resultSetAdmin = statement.executeQuery("select * from admins");
-            while (resultSetAdmin.next()) {
+            resultSet = statement.executeQuery("select * from admins");
+            while (resultSet.next()) {
                 //Nombre de la columna
                 /*System.out.println(resultSet.getString("id") + " | " + resultSet.getString("admin_name")
                         + " | " + resultSet.getString("username") + " | " + resultSet.getString("admin_password")
                         + " | " + resultSet.getString("email"));
                 */
                 //numero de columna
-                System.out.println(resultSetAdmin.getString(1) + " | " + resultSetAdmin.getString(2)
-                        + " | " + resultSetAdmin.getString(3)+ " | " + resultSetAdmin.getString(4)
-                        + " | " + resultSetAdmin.getString(5));
+                System.out.println(resultSet.getString(1) + " | " + resultSet.getString(2)
+                        + " | " + resultSet.getString(3)+ " | " + resultSet.getString(4)
+                        + " | " + resultSet.getString(5));
 
             }
-            resultSetCarrier = statement.executeQuery("select * from carriers");
-            while (resultSetCarrier.next()) {
+            resultSet = statement.executeQuery("select * from carriers");
+            while (resultSet.next()) {
                 //numero de columna
-                System.out.println(resultSetCarrier.getString(1) + " | " + resultSetCarrier.getString(2)
-                        + " | " + resultSetCarrier.getString(3)+ " | " + resultSetCarrier.getString(4)
-                        + " | " + resultSetCarrier.getString(5));
+                System.out.println(resultSet.getString(1) + " | " + resultSet.getString(2)
+                        + " | " + resultSet.getString(3)+ " | " + resultSet.getString(4)
+                        + " | " + resultSet.getString(5));
 
             }
             //search();
             connection.close();
             statement.close();
-            resultSetAdmin.close();
+            resultSet.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -116,12 +122,12 @@ public class JDBC {
             preparedStatement = connection.prepareStatement("select * from admins where id = ?");
             preparedStatement.setString(1,"1");
 
-            resultSetAdmin = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
 
-            if(resultSetAdmin.next()){
-                System.out.println(resultSetAdmin.getString(1) + " | " + resultSetAdmin.getString(2)
-                        + " | " + resultSetAdmin.getString(3)+ " | " + resultSetAdmin.getString(4)
-                        + " | " + resultSetAdmin.getString(5));
+            if(resultSet.next()){
+                System.out.println(resultSet.getString(1) + " | " + resultSet.getString(2)
+                        + " | " + resultSet.getString(3)+ " | " + resultSet.getString(4)
+                        + " | " + resultSet.getString(5));
             }
 
         } catch (SQLException e){

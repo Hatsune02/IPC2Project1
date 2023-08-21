@@ -1,17 +1,33 @@
-package objects.module;
+package entities.module;
 
 public class User {
-    private final int ID;
+    private int id;
     private String name, username,password,email;
-    public User(int ID, String name, String username, String password, String email){
-        this.ID = ID;
+
+    public User() {
+    }
+
+    public User(int id) {
+        this.id = id;
+    }
+
+    public User(String name, String username, String password, String email) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.email = email;
     }
 
-    public int getID() {return ID;}
+    public User(int id, String name, String username, String password, String email){
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public int getId() {return id;}
+    public void setId(int id) {this.id = id;}
     public String getName() {return name;}
     public String getUsername() {return username;}
     public String getPassword() {return password;}
@@ -20,4 +36,5 @@ public class User {
     public void setUsername(String username) {this.username = username;}
     public void setPassword(String password) {this.password = password;}
     public void setEmail(String email) {this.email = email;}
+
 }

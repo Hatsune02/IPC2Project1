@@ -41,28 +41,31 @@ create table final_users(
     username varchar(50) not null unique,
     user_password varchar(50) not null,
     email varchar(50) not null unique,
-    balance decimal(10,2) not null,
-    ban boolean default 0,
-    premium boolean default 0,
+    balance decimal(10,2) not null default 0,
+    ban boolean not null default 0,
+    premium boolean not null default 0,
     primary key(id)
 );
 insert into final_users(user_name,username,user_password,email,balance)
 values
 ('Usuario1','user1','123','example@email.com',250.5);
-drop table if exists categories;
+insert into final_users(user_name,username,user_password,email)
+values
+('Usuario2','user2','123','example2@email.com');
 
+drop table if exists categories;
 create table categories(
 	id int auto_increment,
     category_name varchar(100) not null,
     category_description varchar(200) not null,
     primary key(id)
 );
-/*
+
 insert into categories(id,category_name,category_description)
 values
 ('1','Categoria 1','Descripcion cat 1'),
 ('2','Categoria 2','Descripcion cat 2');
-*/
+
 drop table if exists books;
 create table books(
 	isbn int auto_increment,
@@ -73,14 +76,14 @@ create table books(
     foreign key(category) references categories(id),
     primary key(isbn)
 );
-/*
+
 insert into books(isbn,book_name,price,category,author)
 values
 ('1','libro1','10.00','1','jhon'),
 ('2','libro2','10.00','1','jhon'),
 ('3','libro3','10.00','2','jhon'),
 ('4','libro4','10.00','1','jhon');
-*/
+
 drop table if exists libraries;
 create table libraries(
 	id int auto_increment,
@@ -88,13 +91,13 @@ create table libraries(
     address varchar(100) not null unique,
     primary key(id)
 );
-/*
+
 insert into libraries(id,library_name,address)
 values
 ('1','libreria1','xela'),
 ('2','libreria2','toto'),
 ('3','libreria3','ciudad');
-*/
+
 drop table if exists existing_books;
 create table existing_books(
 	library int not null,
@@ -104,7 +107,7 @@ create table existing_books(
     foreign key (book) references books(isbn),
     primary key (library,book)
 );
-/*
+
 insert into existing_books(library,book,existence)
 values
 ('1','1','5'),
@@ -113,7 +116,13 @@ values
 ('2','2','1'),
 ('2','3','11'),
 ('3','3','9');
-*/
+
+select * from existing_books;
+
+update existing_books set existence=10 where library=1 and book=3;
+
+select * from existing_books;
+
 drop table if exists receptionists;
 create table receptionists(
 	id int auto_increment,
@@ -125,18 +134,18 @@ create table receptionists(
     foreign key(library) references libraries(id),
     primary key(id)
 );
-/*
+
 insert into receptionists(id,receptionist_name,username,receptionist_password,email,library)
 values
 ('1','recepcionista1','recep1','123','example1@example','1');
-*/
+
 drop table if exists loan_applications;
 create table loan_applications(
 	id int auto_increment,
     library int not null,
     receptionist int not null,
     final_user int not null,
-    isbn int not null,
+    book int not null,
     loan_application_date date not null,
     state varchar(20) not null,
     delivery_type varchar(20) not null,
@@ -144,9 +153,12 @@ create table loan_applications(
     foreign key(library) references libraries(id),
     foreign key(receptionist) references receptionists(id),
     foreign key(final_user) references final_users(id),
-    foreign key(isbn) references books(isbn),
+    foreign key(book) references books(isbn),
+    foreign key(carrier) references carriers(id),
     primary key(id)
 );
+insert into loan_applications(library,receptionist,final_user,book,loan_application_date,state,delivery_type,carrier)
+value('3','1','1','2','2023/08/07','PENDIENTE','DOMICILIO',1);
 
 drop table if exists loans;
 create table loans(
@@ -154,16 +166,19 @@ create table loans(
     library int not null,
     receptionist int not null,
     final_user int not null,
-    isbn int not null,
+    book int not null,
     loan_date date not null,
     state varchar(20) not null,
     penalty_fee decimal(10,2) not null,
     foreign key(library) references libraries(id),
     foreign key(receptionist) references receptionists(id),
     foreign key(final_user) references final_users(id),
-    foreign key(isbn) references books(isbn),
+    foreign key(book) references books(isbn),
     primary key(id)
 );
+
+insert into loans(library,receptionist,final_user,book,loan_date,state,penalty_fee)
+value('3','1','1','2','2023/08/07','ACTIVO',0);
 
 drop table if exists transport_between_libraries;
 create table transport_between_libraries(
@@ -178,11 +193,11 @@ create table transport_between_libraries(
     foreign key(carrier) references carriers(id),
     primary key(id)
 );
-/*
-insert into transport_between_libraries(id,library,receptionist,carrier,state)
+
+insert into transport_between_libraries(library,receptionist,carrier,transport_date,state)
 values
-('1','1','1','1','estado malo');
-*/
+('1','1','1','2002/01/01','PENDIENTE');
+
 drop table if exists details_transport;
 create table details_transport(
 	transport_between_library int not null,
@@ -192,10 +207,10 @@ create table details_transport(
     foreign key(book) references books(isbn),
     primary key(transport_between_library,book)
 );
-/*insert into details_transport(transport_between_library,book,units)
+insert into details_transport(transport_between_library,book,units)
 values
 ('1','1','3');
-
+/*
 select existing_books.library, existing_books.book, existing_books.existence, 
 transport_between_libraries.library, details_transport.book, details_transport.units 
 from existing_books
@@ -230,13 +245,15 @@ create table transport_users(
     carrier int not null,
     transport_date date not null,
     state varchar(20) not null,
-    isbn int not null,
+    book int not null,
     foreign key(library) references libraries(id),
     foreign key(final_user) references final_users(id),
     foreign key(carrier) references carriers(id),
-    foreign key(isbn) references books(isbn),
+    foreign key(book) references books(isbn),
     primary key(id)
 );
+insert into transport_users(library,final_user,carrier,transport_date,state,book)
+value('1','2','1','2023-08-07','PENDIENTE','3');
 
 drop table if exists incidents;
 create table incidents(
@@ -253,7 +270,9 @@ create table revocation_requests(
 	id int auto_increment,
     final_user int not null,
     state varchar(20) not null,
-    detail varchar(200) not null,
+    detail varchar(300) not null,
     foreign key(final_user) references final_users(id),
     primary key (id)
 );
+insert into revocation_requests(final_user,state,detail)
+value('2','PENDIENTE','Favor de revocar la suspension ya que cancele el costo del libro daniado');

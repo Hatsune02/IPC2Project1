@@ -1,11 +1,11 @@
-package objects;
+package entities;
 
-import objects.module.*;
-import objects.objects_library.Book;
-import objects.objects_library.Category;
-import objects.objects_library.Library;
-import objects.objects_library.RelationLibraryBook;
-import objects.objets_process.*;
+import entities.module.*;
+import entities.objects_library.Book;
+import entities.objects_library.Category;
+import entities.objects_library.Library;
+import entities.objects_library.ExistingBooks;
+import entities.objets_process.*;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public class OBJECTS {
     public static ArrayList<Book> books = new ArrayList<>();
     public static ArrayList<Category> categories = new ArrayList<>();
     public static ArrayList<Library> libraries = new ArrayList<>();
-    public static ArrayList<RelationLibraryBook> relationsLB = new ArrayList<>();
+    public static ArrayList<ExistingBooks> relationsLB = new ArrayList<>();
 
     //OBJETOS PARA PRECESOS/TRANSACCIONES
     public static ArrayList<DetailsTransport> detailsT = new ArrayList<>();
@@ -31,5 +31,6 @@ public class OBJECTS {
     public static ArrayList<RevocationRequest> revocationRequests = new ArrayList<>();
     public static ArrayList<TransportBetweenLibraries> transportsBL = new ArrayList<>();
     public static ArrayList<TransportToUser> transortsU = new ArrayList<>();
-
+    
+    
 }
