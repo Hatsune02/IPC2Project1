@@ -1,6 +1,7 @@
 package jdbc;
 import static jdbc.Conexion.*;
 import entities.module.*;
+
 import java.sql.*;
 import java.util.*;
 
@@ -9,6 +10,7 @@ public class AdminDAO {
     private static final String SQL_INSERT = "insert into admins(admin_name, username, admin_password, email) value(?,?,?,?)";
     private static final String SQL_UPDATE = "update admins set admin_name=?,username=?,admin_password=?,email=? where id=?";
     private static final String SQL_DELETE = "delete from admins where id=?";
+    private static final String SQL_VALIDATE = "select count(id) as amount from admins where username=? and admin_password=?";
 
     public List<Admin> select(){
         Connection con=null;
@@ -130,4 +132,28 @@ public class AdminDAO {
         }
         return records;
     }
+    public int validateAdmin(Admin admin){
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int records = 0;
+        try {
+            con = getConnection();
+            ps = con.prepareStatement(SQL_VALIDATE);
+            ps.setString(1,admin.getUsername());
+            ps.setString(2,admin.getPassword());
+            rs = ps.executeQuery();
+
+            while (rs.next()){
+                records=rs.getInt("amount");
+            }
+            close(ps);
+            close(rs);
+            close(con);
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return records;
+    }
+
 }

@@ -1,5 +1,6 @@
 import entities.module.*;
-import jdbc.*;
+import jdbc.AdminDAO;
+
 import java.util.*;
 
 public class Main {
