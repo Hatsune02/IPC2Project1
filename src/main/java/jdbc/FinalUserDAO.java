@@ -9,6 +9,8 @@ public class FinalUserDAO {
     private static final String SQL_INSERT = "insert into final_users(user_name, username, user_password, email, balance) value(?,?,?,?,?)";
     private static final String SQL_UPDATE = "update final_users set user_name=?,username=?,user_password=?,email=?,balance=? where id=?";
     private static final String SQL_DELETE = "delete from final_users where id=?";
+    private static final String SQL_VALIDATE = "select count(id) as amount from final_users where username=? and user_password=?";
+
 
     public List<FinalUser> select(){
         Connection con=null;
@@ -22,9 +24,9 @@ public class FinalUserDAO {
             rs = ps.executeQuery();
             while (rs.next()){
                 int id = rs.getInt("id");
-                String name = rs.getString("admin_name");
+                String name = rs.getString("user_name");
                 String username = rs.getString("username");
-                String password = rs.getString("admin_password");
+                String password = rs.getString("user_password");
                 String email = rs.getString("email");
                 double balance = rs.getDouble("balance");
                 finalUsers.add(new FinalUser(id,name,username,password,email,balance));
@@ -123,5 +125,46 @@ public class FinalUserDAO {
             }
         }
         return records;
+    }
+    public int validate(FinalUser finalUser){
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int records = 0;
+        try {
+            con = getConnection();
+            ps = con.prepareStatement(SQL_VALIDATE);
+            ps.setString(1,finalUser.getUsername());
+            ps.setString(2,finalUser.getPassword());
+            rs = ps.executeQuery();
+
+            while (rs.next()){
+                records=rs.getInt("amount");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        finally {
+            try {
+                close(ps);
+                close(rs);
+                close(con);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+        return records;
+    }
+    public FinalUser selectOne(FinalUser finalUser){
+        List<FinalUser> finalUsers = select();
+        for(FinalUser finalUser1 : finalUsers){
+            if(finalUser.getUsername().equals(finalUser1.getUsername()) || finalUser.getId() == finalUser1.getId()){
+                finalUser = finalUser1;
+                break;
+            }
+        }
+        return finalUser;
     }
 }

@@ -25,7 +25,6 @@ public class CategoryDAO {
                 String name = rs.getString("category_name");
                 String description = rs.getString("category_description");
                 categories.add(new Category(id,name,description));
-
             }
 
         }catch (SQLException e){

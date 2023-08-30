@@ -9,6 +9,17 @@ public class ExistingBooksDAO {
     private static final String SQL_INSERT = "insert into existing_books(library, book, existence) value(?,?,?)";
     private static final String SQL_UPDATE = "update existing_books set existence=? where library=? and book=?";
     private static final String SQL_DELETE = "delete from existing_books where library=? and book=?";
+    private static final String SQL_SELECT_JOIN = "select library, libraries.library_name, book, books.book_name, existence " +
+            "from existing_books join libraries on libraries.id = existing_books.library " +
+            "join books on books.isbn = existing_books.book";
+
+    private static final String SQL_SELECT_LIBRARIES = "select library, libraries.library_name from existing_books \n" +
+            "join libraries on libraries.id = existing_books.library\n" +
+            "group by libraries.library_name;";
+    private static final String SQL_SELECT_FILTER = "select library, libraries.library_name, book, books.book_name, existence " +
+            "from existing_books join libraries on libraries.id = existing_books.library\n" +
+            "join books on books.isbn = existing_books.book\n" +
+            "where library=?;";
 
     public List<ExistingBooks> select(){
         Connection con=null;
@@ -116,5 +127,107 @@ public class ExistingBooksDAO {
             }
         }
         return records;
+    }
+    public List<ExistingBooks> list(){
+        Connection con=null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<ExistingBooks> existingBooks = new ArrayList<>();
+
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_SELECT_JOIN);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                int libraryID = rs.getInt("library");
+                String library = rs.getString("libraries.library_name");
+                int bookIsbn = rs.getInt("book");
+                String book = rs.getString("books.book_name");
+                int existence = rs.getInt("existence");
+                existingBooks.add(new ExistingBooks(libraryID,library,bookIsbn,book,existence));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        finally {
+            try{
+                close(rs);
+                close(ps);
+                close(con);
+            }  catch (SQLException e){
+                e.printStackTrace(System.out);
+            }
+
+        }
+        return existingBooks;
+    }
+
+    public List<ExistingBooks> libraries(){
+        Connection con=null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<ExistingBooks> librariesName = new ArrayList<>();
+
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_SELECT_LIBRARIES);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                ExistingBooks ex = new ExistingBooks();
+                ex.setLibraryID(rs.getInt("library"));
+                ex.setLibrary(rs.getString("libraries.library_name"));
+                librariesName.add(ex);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        finally {
+            try{
+                close(rs);
+                close(ps);
+                close(con);
+            }  catch (SQLException e){
+                e.printStackTrace(System.out);
+            }
+
+        }
+        return librariesName;
+    }
+    public List<ExistingBooks> filterList(int id){
+        Connection con=null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<ExistingBooks> existingBooks = new ArrayList<>();
+
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_SELECT_FILTER);
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                int libraryID = rs.getInt("library");
+                String library = rs.getString("libraries.library_name");
+                int bookIsbn = rs.getInt("book");
+                String book = rs.getString("books.book_name");
+                int existence = rs.getInt("existence");
+                existingBooks.add(new ExistingBooks(libraryID,library,bookIsbn,book,existence));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        finally {
+            try{
+                close(rs);
+                close(ps);
+                close(con);
+            }  catch (SQLException e){
+                e.printStackTrace(System.out);
+            }
+
+        }
+        return existingBooks;
     }
 }

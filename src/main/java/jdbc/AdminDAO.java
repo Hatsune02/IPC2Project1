@@ -1,11 +1,10 @@
 package jdbc;
 import static jdbc.Conexion.*;
 import entities.module.*;
-
 import java.sql.*;
 import java.util.*;
 
-public class AdminDAO {
+public class AdminDAO{
     private static final String SQL_SELECT = "select * from admins";
     private static final String SQL_INSERT = "insert into admins(admin_name, username, admin_password, email) value(?,?,?,?)";
     private static final String SQL_UPDATE = "update admins set admin_name=?,username=?,admin_password=?,email=? where id=?";
@@ -39,20 +38,20 @@ public class AdminDAO {
                 admin.setEmail(email);
                 admin = new Admin(id,name,username,password,email);
                 admins.add(admin);*/
+
             }
 
         }catch (SQLException e){
             e.printStackTrace(System.out);
         }
         finally {
-            try{
-                close(rs);
+            try {
                 close(ps);
+                close(rs);
                 close(con);
-            }  catch (SQLException e){
-                e.printStackTrace(System.out);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-
         }
         return admins;
     }
@@ -132,7 +131,7 @@ public class AdminDAO {
         }
         return records;
     }
-    public int validateAdmin(Admin admin){
+    public int validate(Admin admin){
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -147,13 +146,30 @@ public class AdminDAO {
             while (rs.next()){
                 records=rs.getInt("amount");
             }
-            close(ps);
-            close(rs);
-            close(con);
+
         } catch (SQLException e) {
             e.printStackTrace(System.out);
         }
+        finally {
+            try {
+                close(ps);
+                close(rs);
+                close(con);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
         return records;
     }
-
+    public Admin selectOne(Admin admin){
+        List<Admin> admins = select();
+        for(Admin admin1 : admins){
+            if(admin1.getUsername().equals(admin.getUsername()) || admin1.getId() == admin.getId()){
+                admin = admin1;
+                break;
+            }
+        }
+        return admin;
+    }
 }

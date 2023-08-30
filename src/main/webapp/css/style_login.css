@@ -1,7 +1,6 @@
 *{
     margin: 0px;
     padding: 0px;
-
 }
 
 body{
@@ -10,8 +9,9 @@ body{
     background-position: center center;
     background-attachment: fixed;
     */
-    background: url(../img/miku.jpg) no-repeat center center fixed;
+    background: url(../img/login.png) no-repeat center center fixed;
     background-size: cover;
+
 }
 #cuadro{
     width: 330px;
@@ -41,7 +41,7 @@ body{
     color: #ffffff;
     font-size: 15px;
 }
-#combo_box select{
+#box select{
     width: 320px;
     height: 35px;
     font-family: verdana, serif;

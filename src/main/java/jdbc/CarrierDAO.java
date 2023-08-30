@@ -5,14 +5,14 @@ import entities.module.*;
 import java.sql.*;
 import java.util.*;
 
-import static jdbc.Conexion.close;
-import static jdbc.Conexion.getConnection;
 
 public class CarrierDAO {
     private static final String SQL_SELECT = "select * from carriers";
     private static final String SQL_INSERT = "insert into carriers(carrier_name, username, carrier_password, email) value(?,?,?,?)";
     private static final String SQL_UPDATE = "update carriers set carrier_name=?,username=?,carrier_password=?,email=? where id=?";
     private static final String SQL_DELETE = "delete from carriers where id=?";
+    private static final String SQL_VALIDATE = "select count(id) as amount from carriers where username=? and carrier_password=?";
+
 
     public List<Carrier> select(){
         Connection con=null;
@@ -123,5 +123,46 @@ public class CarrierDAO {
             }
         }
         return records;
+    }
+    public int validate(Carrier carrier){
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int records = 0;
+        try {
+            con = getConnection();
+            ps = con.prepareStatement(SQL_VALIDATE);
+            ps.setString(1,carrier.getUsername());
+            ps.setString(2,carrier.getPassword());
+            rs = ps.executeQuery();
+
+            while (rs.next()){
+                records=rs.getInt("amount");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        finally {
+            try {
+                close(ps);
+                close(rs);
+                close(con);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+        return records;
+    }
+    public Carrier selectOne(Carrier carrier){
+        List<Carrier> carriers = select();
+        for(Carrier carrier1 : carriers){
+            if(carrier.getUsername().equals(carrier1.getUsername()) || carrier.getId() == carrier1.getId()){
+                carrier = carrier1;
+                break;
+            }
+        }
+        return carrier;
     }
 }

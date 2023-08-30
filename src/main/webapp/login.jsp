@@ -7,17 +7,12 @@
     <link href="css/style_login.css" rel="stylesheet" type="text/css">
 </head>
     <%
-        String response1 = "";
-        if(request.getParameter("record")!=null){
-            int r = Integer.parseInt(request.getParameter("record"));
-            if(r==0){
-                response1 = "Error: Datos incorrectos";
-            }
-        }
+        String response1 = (String)request.getAttribute("response1");
+        if(response1==null) response1=" ";
     %>
 <body>
     <div id="cuadro">
-        <form method="get" action="LoginController">
+        <form method="post" action="LoginController">
             <p id="title"> INICIAR SESIÓN</p>
             <hr>
             <br/><br/>
@@ -29,16 +24,16 @@
             <br/><br/>
             <input type="password" class="entry" id="password" name="password" required>
             <br/><br/>
-            <label id="combo_box">
-                <select>
-                    <option>Administrador</option>
-                    <option>Recepcionista</option>
-                    <option>Transportista</option>
-                    <option>Usuario</option>
+            <label id="box">
+                <select name="combo_box">
+                    <option value="admin">Administrador</option>
+                    <option value="recep">Recepcionista</option>
+                    <option value="carrier">Transportista</option>
+                    <option value="user">Usuario</option>
                 </select>
             </label>
             <br/><br/>
-            <input type="submit" value="Login" id="button" name="button">
+            <input type="submit" id="button" name="action" value="Login" >
             <br/>
             <p style="color: red"><%= response1%></p>
         </form>
