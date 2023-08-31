@@ -12,6 +12,7 @@ public class CarrierDAO {
     private static final String SQL_UPDATE = "update carriers set carrier_name=?,username=?,carrier_password=?,email=? where id=?";
     private static final String SQL_DELETE = "delete from carriers where id=?";
     private static final String SQL_VALIDATE = "select count(id) as amount from carriers where username=? and carrier_password=?";
+    private static final String SQL_SEARCH = "select * from carriers where id like ? or carrier_name like ? or username like ? or carrier_password like ? or email like ?";
 
 
     public List<Carrier> select(){
@@ -158,11 +159,50 @@ public class CarrierDAO {
     public Carrier selectOne(Carrier carrier){
         List<Carrier> carriers = select();
         for(Carrier carrier1 : carriers){
-            if(carrier.getUsername().equals(carrier1.getUsername()) || carrier.getId() == carrier1.getId()){
+            if(carrier1.getUsername().equals(carrier.getUsername()) || carrier1.getId() == carrier.getId()){
                 carrier = carrier1;
                 break;
             }
         }
         return carrier;
+    }
+    public List<Carrier> search(String text){
+        Connection con=null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Carrier> carriers = new ArrayList<>();
+
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_SEARCH);
+            ps.setString(1,text + '%');
+            ps.setString(2,text + '%');
+            ps.setString(3,text + '%');
+            ps.setString(4,text + '%');
+            ps.setString(5,text + '%');
+            rs = ps.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String name = rs.getString("carrier_name");
+                String username = rs.getString("username");
+                String password = rs.getString("carrier_password");
+                String email = rs.getString("email");
+                carriers.add(new Carrier(id,name,username,password,email));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        finally {
+            try{
+                close(rs);
+                close(ps);
+                close(con);
+            }  catch (SQLException e){
+                e.printStackTrace(System.out);
+            }
+
+        }
+        return carriers;
     }
 }

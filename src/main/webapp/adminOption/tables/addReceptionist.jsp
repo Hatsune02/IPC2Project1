@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.demo1.entities.objects_library.*" %><%--
+<%@ page import="entities.objects_library.*" %><%--
   Created by IntelliJ IDEA.
   User: dog
   Date: 27/08/23
@@ -15,34 +15,33 @@
     <title>Agregar</title>
 </head>
 <body>
-<h2>Agregar Libro</h2>
+<h2>Agregar Receptionista</h2>
 <hr>
 <div class="row p-0 m-0">
     <div class="col-6">
-        <form action="AdminController?menu=books" method="post" class="form-control m-0" style="height: fit-content;">
-            <label>ISBN:</label>
-            <input class="form-control" type="text" name="isbn" required />
+        <form action="AdminController?menu=receptionists" method="post" class="form-control m-0" style="height: fit-content;">
             Nombre:
             <input class="form-control" type="text" name="name" required />
-            Precio:
-            <input class="form-control" type="text" name="price" required />
-            <select class="custom-select form-inline mt-2" name="category">
-                <option value="void">categories</option>
+            Username:
+            <input class="form-control" type="text" name="username" required />
+            Email:
+            <input class="form-control" type="text" name="email" required />
+            Contraseña:
+            <input class="form-control" type="password" name="password" required />
+            Biblioteca:
+            <select class="custom-select form-inline" name="libId">
+                <option value="void">Escoge una biblioteca</option>
                 <%
-                    List<Category> categories = (List<Category>) request.getAttribute("categories");
-                    if(categories!=null){
-                        for(Category category:categories){
+                    List<Library> libraries = (List<Library>) request.getAttribute("libraries");
+                    if(libraries!=null){
+                        for(Library library:libraries){
                 %>
-                <option value="<%=category.getId()%>"><%=category.getName()%></option>
+                <option value="<%=library.getId()%>"><%=library.getName()%></option>
                 <%}}%>
             </select>
-            Autor:
-            <input class="form-control" type="text" name="author" required />
-            Descripción:
-            <textarea class="form-control" name="description" required></textarea>
-            <br/>
-            <input class="btn btn-primary" type="submit" name="action" value="Guardar Libro" />
-            <a href="AdminController?menu=books&action=list">Regresar</a>
+            <br><br>
+            <input class="btn btn-primary" type="submit" name="action" value="Guardar" />
+            <a href="AdminController?menu=receptionists&action=list">Regresar</a>
             <p style="color: red">${response1}</p>
         </form>
     </div>

@@ -1,5 +1,4 @@
 <%@ page import="java.util.*" %>
-<%@ page import="entities.module.*" %>
 <%@ page import="entities.objects_library.*" %><%--
   Created by IntelliJ IDEA.
   User: dog
@@ -22,7 +21,7 @@
         <form class="">
             <a class="btn btn-success" href="AdminController?menu=books&action=add"> Agregar Libro </a>
         </form>
-        <form class="form-inline" method="post" action="AdminController?menu=books&action=filter">
+        <form class="form-inline" method="post" action="AdminController?menu=books">
             <select name="libraryComboBox" class="custom-select form-inline" style="width: 300px">
                 <option value="void">Escoge una libreria</option>
                 <%

@@ -1,6 +1,7 @@
 package jdbc;
 import static jdbc.Conexion.*;
 import entities.module.*;
+
 import java.sql.*;
 import java.util.*;
 
@@ -10,7 +11,18 @@ public class ReceptionistDAO {
     private static final String SQL_UPDATE = "update receptionists set receptionist_name=?,username=?,receptionist_password=?,email=?,library=? where id=?";
     private static final String SQL_DELETE = "delete from receptionists where id=?";
     private static final String SQL_VALIDATE = "select count(id) as amount from receptionists where username=? and receptionist_password=?";
-
+    private static final String SQL_SELECT_JOIN = "select receptionists.id, receptionist_name, username,receptionist_password,email,library,libraries.library_name from receptionists\n" +
+            "join libraries on libraries.id = receptionists.library;";
+    private static final String SQL_SELECT_LIBRARIES = "select library, libraries.library_name from receptionists join libraries on libraries.id = receptionists.library\n" +
+            "group by libraries.library_name;";
+    private static final String SQL_SELECT_FILTER = "select receptionists.id, receptionist_name, username,receptionist_password,email,library,libraries.library_name from receptionists\n" +
+            "join libraries on libraries.id = receptionists.library where library=?";
+    private static final String SQL_SEARCH = "select receptionists.id, receptionist_name, username,receptionist_password,email,library,libraries.library_name from receptionists\n" +
+            "join libraries on libraries.id = receptionists.library " +
+            "where receptionists.id like ? or receptionist_name like ? or username like ? or receptionist_password like ? or email like ? or library like ? or libraries.library_name like ?";
+    private static final String SQL_F_S = "select receptionists.id, receptionist_name, username,receptionist_password,email,library,libraries.library_name from receptionists\n" +
+            "join libraries on libraries.id = receptionists.library " +
+            "where library=? and (receptionists.id like ? or receptionist_name like ? or username like ? or receptionist_password like ? or email like ?)";
 
     public List<Receptionist> select(){
         Connection con=null;
@@ -157,15 +169,205 @@ public class ReceptionistDAO {
         }
         return records;
     }
-
     public Receptionist selectOne(Receptionist receptionist){
         List<Receptionist> receptionists = select();
         for(Receptionist receptionist1 : receptionists){
-            if(receptionist.getUsername().equals(receptionist1.getUsername()) || receptionist.getId() == receptionist1.getId()){
+            if(receptionist1.getUsername().equals(receptionist.getUsername()) || receptionist1.getId() == receptionist.getId()){
                 receptionist = receptionist1;
                 break;
             }
         }
         return receptionist;
+    }
+    public List<Receptionist> list(){
+        Connection con=null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Receptionist> receptionists = new ArrayList<>();
+
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_SELECT_JOIN);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String name = rs.getString("receptionist_name");
+                String username = rs.getString("username");
+                String password = rs.getString("receptionist_password");
+                String email = rs.getString("email");
+                int libraryID = rs.getInt("library");
+                String library = rs.getString("libraries.library_name");
+                receptionists.add(new Receptionist(id,name,username,password,email,libraryID,library));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        finally {
+            try{
+                close(rs);
+                close(ps);
+                close(con);
+            }  catch (SQLException e){
+                e.printStackTrace(System.out);
+            }
+
+        }
+        return receptionists;
+    }
+    public List<Receptionist> libraries(){
+        Connection con=null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Receptionist> librariesName = new ArrayList<>();
+
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_SELECT_LIBRARIES);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Receptionist recep = new Receptionist();
+                recep.setLibraryID(rs.getInt("library"));
+                recep.setLibrary(rs.getString("libraries.library_name"));
+                librariesName.add(recep);
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        finally {
+            try{
+                close(rs);
+                close(ps);
+                close(con);
+            }  catch (SQLException e){
+                e.printStackTrace(System.out);
+            }
+
+        }
+        return librariesName;
+    }
+
+    public List<Receptionist> filterList(int id){
+        Connection con=null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Receptionist> receptionists = new ArrayList<>();
+
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_SELECT_FILTER);
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                int id1 = rs.getInt("id");
+                String name = rs.getString("receptionist_name");
+                String username = rs.getString("username");
+                String password = rs.getString("receptionist_password");
+                String email = rs.getString("email");
+                int libraryID = rs.getInt("library");
+                String library = rs.getString("libraries.library_name");
+                receptionists.add(new Receptionist(id1,name,username,password,email,libraryID,library));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        finally {
+            try{
+                close(rs);
+                close(ps);
+                close(con);
+            }  catch (SQLException e){
+                e.printStackTrace(System.out);
+            }
+
+        }
+        return receptionists;
+    }
+    public List<Receptionist> search(String text){
+        Connection con=null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Receptionist> receptionists = new ArrayList<>();
+
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_SEARCH);
+            ps.setString(1,text + '%');
+            ps.setString(2,text + '%');
+            ps.setString(3,text + '%');
+            ps.setString(4,text + '%');
+            ps.setString(5,text + '%');
+            ps.setString(6,text + '%');
+            ps.setString(7,text + '%');
+            rs = ps.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String name = rs.getString("receptionist_name");
+                String username = rs.getString("username");
+                String password = rs.getString("receptionist_password");
+                String email = rs.getString("email");
+                int libraryID = rs.getInt("library");
+                String library = rs.getString("libraries.library_name");
+                receptionists.add(new Receptionist(id,name,username,password,email,libraryID,library));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        finally {
+            try{
+                close(rs);
+                close(ps);
+                close(con);
+            }  catch (SQLException e){
+                e.printStackTrace(System.out);
+            }
+
+        }
+        return receptionists;
+    }
+    public List<Receptionist> searchAndFilter(int id, String text){
+        Connection con=null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Receptionist> receptionists = new ArrayList<>();
+
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_F_S);
+            ps.setInt(1, id);
+            ps.setString(2,text + '%');
+            ps.setString(3,text + '%');
+            ps.setString(4,text + '%');
+            ps.setString(5,text + '%');
+            ps.setString(6,text + '%');
+            rs = ps.executeQuery();
+            while (rs.next()){
+                int id1 = rs.getInt("id");
+                String name = rs.getString("receptionist_name");
+                String username = rs.getString("username");
+                String password = rs.getString("receptionist_password");
+                String email = rs.getString("email");
+                int libraryID = rs.getInt("library");
+                String library = rs.getString("libraries.library_name");
+                receptionists.add(new Receptionist(id1,name,username,password,email,libraryID,library));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        finally {
+            try{
+                close(rs);
+                close(ps);
+                close(con);
+            }  catch (SQLException e){
+                e.printStackTrace(System.out);
+            }
+
+        }
+        return receptionists;
     }
 }

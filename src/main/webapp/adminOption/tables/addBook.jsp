@@ -26,8 +26,9 @@
             <input class="form-control" type="text" name="name" required />
             Precio:
             <input class="form-control" type="text" name="price" required />
-            <select class="custom-select form-inline mt-2" name="category">
-                <option value="void">categories</option>
+            Categoría:
+            <select class="custom-select form-inline" name="category">
+                <option value="void">Escoge una categoría</option>
                 <%
                     List<Category> categories = (List<Category>) request.getAttribute("categories");
                     if(categories!=null){
@@ -38,8 +39,6 @@
             </select>
             Autor:
             <input class="form-control" type="text" name="author" required />
-            Descripción:
-            <textarea class="form-control" name="description" required></textarea>
             <br/>
             <input class="btn btn-primary" type="submit" name="action" value="Guardar Libro" />
             <a href="AdminController?menu=books&action=list">Regresar</a>

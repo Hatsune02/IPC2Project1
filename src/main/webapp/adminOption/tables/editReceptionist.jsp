@@ -1,6 +1,3 @@
-<%@ page import="com.example.demo1.entities.objects_library.ExistingBooks" %>
-<%@ page import="com.example.demo1.jdbc.ExistingBooksDAO" %>
-<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,22 +10,22 @@
 <hr>
 <div class="row p-0 m-0">
     <div class="col-6">
-        <form action="AdminController?menu=books" method="post" class="form-control m-0" style="height: fit-content;">
-            Código de Biblioteca:
-            <input class="form-control"  type="text" name="libId" readonly="" value="${book.getLibraryID()}" required/>
+        <form action="AdminController?menu=receptionists" method="post" class="form-control m-0" style="height: fit-content;">
+            Código:
+            <input class="form-control"  type="text" name="id" readonly="" value="${receptionist.getId()}" required/>
+            Nombre:
+            <input class="form-control"  type="text" name="name" value="${receptionist.getName()}" required/>
+            Username:
+            <input class="form-control"  type="text" name="username" value="${receptionist.getUsername()}" required/>
+            Email:
+            <input class="form-control"  type="text" name="email" value="${receptionist.getEmail()}" required/>
+            Contraseña:
+            <input class="form-control"  type="password" name="password" value="${receptionist.getPassword()}" required/>
             Biblioteca:
-            <input class="form-control"  type="text" name="library" readonly="" value="${book.getLibrary()}" required/>
-            isbn:
-            <input class="form-control"  type="text" name="isbn" readonly="" value="${book.getBookIsbn()}" required/>
-            Libro:
-            <input class="form-control"  type="text" name="book" readonly="" value="${book.getBook()}" required/>
-            Existencia:
-            <input class="form-control"  type="text" name="stock" value="${book.getExistence()}" required/>
-            Descripción:
-            <textarea class="form-control" name="description" required></textarea>
+            <input class="form-control"  type="text" name="libId" value="${receptionist.getLibraryID()}" required/>
             <br/>
             <input class="btn btn-primary" type="submit" name="action" value="Actualizar"/>
-            <a href="AdminController?menu=books&action=list">Regresar</a>
+            <a href="AdminController?menu=receptionists&action=list">Regresar</a>
             <p style="color: red">${response1}</p>
         </form>
     </div>
@@ -38,3 +35,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
+

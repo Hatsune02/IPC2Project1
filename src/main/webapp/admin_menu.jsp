@@ -22,8 +22,8 @@
                 </button>
                 <div class="dropdown-menu text-center">
                     <a class="dropdown-item" href="AdminController?menu=admins&action=list" target="myFrame">Administradores</a>
-                    <a class="dropdown-item" href="AdminController?menu=receptionists" target="myFrame">Recepcionistas</a>
-                    <a class="dropdown-item" href="AdminController?menu=carriers" target="myFrame">Transportistas</a>
+                    <a class="dropdown-item" href="AdminController?menu=receptionists&action=list" target="myFrame">Recepcionistas</a>
+                    <a class="dropdown-item" href="AdminController?menu=carriers&action=list" target="myFrame">Transportistas</a>
                 </div>
             </li>
             <li class="nav-item">
