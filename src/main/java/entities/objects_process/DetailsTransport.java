@@ -1,4 +1,4 @@
-package entities.objets_process;
+package entities.objects_process;
 
 public class DetailsTransport {
     private int transportBetweenLibrary, bookIsbn;

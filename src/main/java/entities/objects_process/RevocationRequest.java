@@ -1,9 +1,9 @@
-package entities.objets_process;
+package entities.objects_process;
 
 public class RevocationRequest {
     private int id;
     private int finalUserId;
-    private String state,detail;
+    private String finalUser,state,detail;
 
     public RevocationRequest() {
     }
@@ -21,6 +21,13 @@ public class RevocationRequest {
         this.state = state;
         this.detail = detail;
     }
+    public RevocationRequest(int id, int finalUserId,String finalUser, String state, String detail) {
+        this.id = id;
+        this.finalUserId = finalUserId;
+        this.finalUser = finalUser;
+        this.state = state;
+        this.detail = detail;
+    }
 
     public int getId() {return id;}
     public int getFinalUserId() {return finalUserId;}
@@ -29,6 +36,18 @@ public class RevocationRequest {
     public void setState(String state) {this.state = state;}
     public String getDetail() {return detail;}
     public void setDetail(String detail) {this.detail = detail;}
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFinalUser() {
+        return finalUser;
+    }
+
+    public void setFinalUser(String finalUser) {
+        this.finalUser = finalUser;
+    }
 
     @Override
     public String toString() {

@@ -1,4 +1,4 @@
-package entities.objets_process;
+package entities.objects_process;
 
 public class Incident {
     private int id;

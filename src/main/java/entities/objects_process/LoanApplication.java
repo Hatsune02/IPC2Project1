@@ -1,4 +1,4 @@
-package entities.objets_process;
+package entities.objects_process;
 
 import java.sql.Date;
 

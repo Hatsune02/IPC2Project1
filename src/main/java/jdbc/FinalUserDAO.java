@@ -7,7 +7,7 @@ import java.util.*;
 public class FinalUserDAO {
     private static final String SQL_SELECT = "select * from final_users";
     private static final String SQL_INSERT = "insert into final_users(user_name, username, user_password, email, balance) value(?,?,?,?,?)";
-    private static final String SQL_UPDATE = "update final_users set user_name=?,username=?,user_password=?,email=?,balance=? where id=?";
+    private static final String SQL_UPDATE = "update final_users set user_name=?,username=?,user_password=?,email=?,balance=?,ban=?,premium=? where id=?";
     private static final String SQL_DELETE = "delete from final_users where id=?";
     private static final String SQL_VALIDATE = "select count(id) as amount from final_users where username=? and user_password=?";
 
@@ -29,6 +29,8 @@ public class FinalUserDAO {
                 String password = rs.getString("user_password");
                 String email = rs.getString("email");
                 double balance = rs.getDouble("balance");
+                boolean ban = rs.getBoolean("ban");
+                boolean premium = rs.getBoolean("premium");
                 finalUsers.add(new FinalUser(id,name,username,password,email,balance));
 
             }
@@ -87,7 +89,9 @@ public class FinalUserDAO {
             ps.setString(3,finalUser.getPassword());
             ps.setString(4,finalUser.getEmail());
             ps.setDouble(5,finalUser.getBalance());
-            ps.setInt(6,finalUser.getId());
+            ps.setBoolean(6,finalUser.isBan());
+            ps.setBoolean(7,finalUser.isPremium());
+            ps.setInt(8,finalUser.getId());
             records = ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -160,7 +164,7 @@ public class FinalUserDAO {
     public FinalUser selectOne(FinalUser finalUser){
         List<FinalUser> finalUsers = select();
         for(FinalUser finalUser1 : finalUsers){
-            if(finalUser.getUsername().equals(finalUser1.getUsername()) || finalUser.getId() == finalUser1.getId()){
+            if(finalUser1.getUsername().equals(finalUser.getUsername()) || finalUser1.getId() == finalUser.getId()){
                 finalUser = finalUser1;
                 break;
             }

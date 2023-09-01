@@ -27,10 +27,10 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="AdminController?menu=revocation" target="myFrame">Revocación de suspención</a>
+                <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="AdminController?menu=revocation&action=listP" target="myFrame">Revocación de suspención</a>
             </li>
             <li class="nav-item">
-                <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="AdminController?menu=parameters" target="myFrame">Parametros</a>
+                <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="AdminController?menu=parameters&action=list" target="myFrame">Parametros</a>
             </li>
         </ul>
     </div>

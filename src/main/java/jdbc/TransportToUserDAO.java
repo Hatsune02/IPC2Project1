@@ -1,6 +1,6 @@
 package jdbc;
 import static jdbc.Conexion.*;
-import entities.objets_process.*;
+import entities.objects_process.*;
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
