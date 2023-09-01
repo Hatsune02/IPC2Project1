@@ -4,6 +4,7 @@ import java.util.*;
 
 import entities.module.*;
 import entities.objects_library.*;
+import entities.objects_process.*;
 import jdbc.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.*;
@@ -19,6 +20,8 @@ public class AdminController extends HttpServlet{
     CategoryDAO categoryDAO = new CategoryDAO();
     BookDAO bookDAO = new BookDAO();
     LibraryDAO libraryDAO = new LibraryDAO();
+    RevocationRequestDAO revocationRequestDAO = new RevocationRequestDAO();
+    ParameterDAO parameterDAO = new ParameterDAO();
     String adminMenu = "admin_menu.jsp";
     String adminOption = "adminOption/";
     String admins = adminOption+"admins.jsp";
@@ -33,6 +36,8 @@ public class AdminController extends HttpServlet{
     String editReceptionist = adminOption+"tables/editReceptionist.jsp";
     String addCarrier = adminOption+"tables/addCarrier.jsp";
     String editCarrier = adminOption+"tables/editCarrier.jsp";
+    String editRevocation = adminOption+"tables/editRevocation.jsp";
+    String editParameter = adminOption+"tables/editParameter.jsp";
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -108,7 +113,6 @@ public class AdminController extends HttpServlet{
                     break;
 
             }
-            request.getRequestDispatcher(receptionists).forward(request,response);
         }
         if(menu.equals("books")){
             switch (action){
@@ -131,13 +135,44 @@ public class AdminController extends HttpServlet{
                     searchBooks(request,response);
                     break;
             }
-            //request.getRequestDispatcher(books).forward(request,response);
         }
         if(menu.equals("revocation")){
-            request.getRequestDispatcher(revocation).forward(request,response);
+            switch (action){
+                case "listP":
+                    listRevocationRequestPending(request,response);
+                    break;
+                case "listA":
+                    listRevocationRequestAccept(request,response);
+                    break;
+                case "listD":
+                    listRevocationRequestDecline(request,response);
+                    break;
+                case "edit":
+                    editRevocationRequest(request,response);
+                    break;
+                case "Aceptar":
+                    acceptRevocationRequest(request,response);
+                    break;
+                case "Rechazar":
+                    declineRevocationRequest(request,response);
+                    break;
+                case "Buscar":
+                    searchRequest(request,response);
+                    break;
+            }
         }
         if(menu.equals("parameters")){
-            request.getRequestDispatcher(parameters).forward(request,response);
+            switch (action){
+                case "list":
+                    listParameters(request,response);
+                    break;
+                case "edit":
+                    editParameter(request,response);
+                    break;
+                case "Actualizar":
+                    updateParameter(request,response);
+                    break;
+            }
         }
     }
     @Override
@@ -453,8 +488,8 @@ public class AdminController extends HttpServlet{
     }
 
     public void listCarriers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        List<Carrier> receptionistsList = carrierDAO.select();
-        request.setAttribute("carriersList",receptionistsList);
+        List<Carrier> carriersList = carrierDAO.select();
+        request.setAttribute("carriersList",carriersList);
         request.getRequestDispatcher(carriers).forward(request,response);
     }
     public void insertCarriers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -534,7 +569,6 @@ public class AdminController extends HttpServlet{
     }
     public void searchCarrier(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String text = request.getParameter("search");
-        System.out.println(text);
         if(!text.isEmpty()){
             List<Carrier> carriersList = carrierDAO.search(text);
             request.setAttribute("carriersList", carriersList);
@@ -542,6 +576,143 @@ public class AdminController extends HttpServlet{
         }
         else{
             listCarriers(request,response);
+        }
+    }
+
+    int list = 0; //Saber en que lista estamos (pendiente, aceptados o rechazados) (1,2,3)
+    public void listRevocationRequestPending(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        list=0;
+        List<RevocationRequest> revocationList = revocationRequestDAO.listPending();
+        request.setAttribute("revocationList",revocationList);
+        request.getRequestDispatcher(revocation).forward(request,response);
+    }
+    public void listRevocationRequestAccept(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        list=1;
+        List<RevocationRequest> revocationList = revocationRequestDAO.listAccept();
+        request.setAttribute("revocationList",revocationList);
+        request.getRequestDispatcher(revocation).forward(request,response);
+    }
+    public void listRevocationRequestDecline(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        list=2;
+        List<RevocationRequest> revocationList = revocationRequestDAO.listDecline();
+        request.setAttribute("revocationList",revocationList);
+        request.getRequestDispatcher(revocation).forward(request,response);
+    }
+    public void editRevocationRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        RevocationRequest revocationRequest = new RevocationRequest(id);
+        revocationRequest = revocationRequestDAO.selectOne(revocationRequest);
+        request.setAttribute("revocationRequest",revocationRequest);
+        request.getRequestDispatcher(editRevocation).forward(request,response);
+    }
+    public void acceptRevocationRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        //cambiar estado de usuario final
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        FinalUserDAO finalUserDAO = new FinalUserDAO();
+        FinalUser finalUser = finalUserDAO.selectOne(new FinalUser(userId));
+        finalUser.setBan(false);
+        finalUserDAO.update(finalUser);
+
+        RevocationRequest request1 = new RevocationRequest();
+        request1.setId(id);
+        request1.setState("ACEPTADO");
+        revocationRequestDAO.updateState(request1);
+        listRevocationRequestPending(request,response);
+    }
+    public void declineRevocationRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        RevocationRequest request1 = new RevocationRequest();
+        request1.setId(id);
+        request1.setState("RECHAZADO");
+        revocationRequestDAO.updateState(request1);
+        listRevocationRequestPending(request,response);
+    }
+    public void searchRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String text = request.getParameter("search");
+        if(list == 0){ //pendientes
+            if(!text.isEmpty()){
+                List<RevocationRequest> revocationList = revocationRequestDAO.searchP(text);
+                request.setAttribute("revocationList", revocationList);
+                request.getRequestDispatcher(revocation).forward(request,response);
+            }
+            else{
+                listRevocationRequestPending(request,response);
+            }
+        }
+        else if(list == 1){ //aceptados
+            if(!text.isEmpty()){
+                List<RevocationRequest> revocationList = revocationRequestDAO.searchA(text);
+                request.setAttribute("revocationList", revocationList);
+                request.getRequestDispatcher(revocation).forward(request,response);
+            }
+            else{
+                listRevocationRequestAccept(request,response);
+            }
+        }
+        else if(list == 2){ //rechazados
+            if(!text.isEmpty()){
+                List<RevocationRequest> revocationList = revocationRequestDAO.searchD(text);
+                request.setAttribute("revocationList", revocationList);
+                request.getRequestDispatcher(revocation).forward(request,response);
+            }
+            else{
+                listRevocationRequestDecline(request,response);
+            }
+        }
+    }
+
+    public void listParameters(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        List<Parameter> parameterList = parameterDAO.select();
+        request.setAttribute("parameterList",parameterList);
+        request.getRequestDispatcher(parameters).forward(request,response);
+    }
+    public void editParameter(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Parameter actualParameter = new Parameter(id);
+        actualParameter = parameterDAO.selectOne(actualParameter);
+        request.setAttribute("parameter",actualParameter);
+        request.getRequestDispatcher(editParameter).forward(request,response);
+    }
+    public void updateParameter(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String parameterName = request.getParameter("name");
+        String error = " ";
+        boolean accept = false;
+
+        if(id == 4 || id == 5 || id == 7){
+            int parameterValue = 0;
+            try{
+                parameterValue = Integer.parseInt(request.getParameter("value"));
+                accept = true;
+            } catch (Exception e){
+                error = "Error: Ingrese una número";
+            }
+            if(accept){
+                parameterDAO.update(new Parameter(id,parameterName, parameterValue));
+                listParameters(request,response);
+            }
+            else {
+                request.setAttribute("response1",error);
+                editParameter(request,response);
+            }
+        }
+        else{
+            double parameterValue = 0;
+            try{
+                parameterValue = Double.parseDouble(request.getParameter("value"));
+                accept = true;
+            } catch (Exception e){
+                error = "Error: Ingrese una valor monetario";
+            }
+            if(accept){
+                parameterDAO.update(new Parameter(id,parameterName, parameterValue));
+                listParameters(request,response);
+            }
+            else {
+                request.setAttribute("response1",error);
+                editParameter(request,response);
+            }
         }
     }
 }

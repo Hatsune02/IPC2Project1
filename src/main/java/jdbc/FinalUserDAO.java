@@ -10,6 +10,7 @@ public class FinalUserDAO {
     private static final String SQL_UPDATE = "update final_users set user_name=?,username=?,user_password=?,email=?,balance=?,ban=?,premium=? where id=?";
     private static final String SQL_DELETE = "delete from final_users where id=?";
     private static final String SQL_VALIDATE = "select count(id) as amount from final_users where username=? and user_password=?";
+    private static final String SQL_SEARCH = "select * from final_users where id like ? or user_name like ? or username like ? or email like ? or balance like ?";
 
 
     public List<FinalUser> select(){
@@ -31,7 +32,7 @@ public class FinalUserDAO {
                 double balance = rs.getDouble("balance");
                 boolean ban = rs.getBoolean("ban");
                 boolean premium = rs.getBoolean("premium");
-                finalUsers.add(new FinalUser(id,name,username,password,email,balance));
+                finalUsers.add(new FinalUser(id,name,username,password,email,balance,ban,premium));
 
             }
 
@@ -170,5 +171,48 @@ public class FinalUserDAO {
             }
         }
         return finalUser;
+    }
+
+    public List<FinalUser> search(String text){
+        Connection con=null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<FinalUser> finalUsers = new ArrayList<>();
+
+        try{
+            con = getConnection();
+            ps = con.prepareStatement(SQL_SEARCH);
+            ps.setString(1,text + '%');
+            ps.setString(2,text + '%');
+            ps.setString(3,text + '%');
+            ps.setString(4,text + '%');
+            ps.setString(5,text + '%');
+            rs = ps.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String name = rs.getString("user_name");
+                String username = rs.getString("username");
+                String password = rs.getString("user_password");
+                String email = rs.getString("email");
+                double balance = rs.getDouble("balance");
+                boolean ban = rs.getBoolean("ban");
+                boolean premium = rs.getBoolean("premium");
+                finalUsers.add(new FinalUser(id,name,username,password,email,balance,ban,premium));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace(System.out);
+        }
+        finally {
+            try{
+                close(rs);
+                close(ps);
+                close(con);
+            }  catch (SQLException e){
+                e.printStackTrace(System.out);
+            }
+
+        }
+        return finalUsers;
     }
 }

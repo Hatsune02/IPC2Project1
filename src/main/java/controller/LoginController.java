@@ -19,33 +19,30 @@ public class LoginController extends HttpServlet{
     FinalUserDAO finalUserDAO= new FinalUserDAO();
     String login = "login.jsp";
     String adminMenu = "AdminController?menu=admin&action=list";
-    String carrierMenu = "CarrierController?action=carrier";
-    String userMenu = "FinalUserController?action=user";
-    String receptionMenu = "ReceptionController?action=recep";
+    String carrierMenu = "CarrierController?menu=carrier";
+    String userMenu = "FinalUserController?menu=user";
+    String receptionMenu = "ReceptionController?menu=recep";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String access = "";
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
-        System.out.println("entro dopos");
         if(action == null) action="log";
         if(action.equalsIgnoreCase("log")){
             access = login;
         }
         else if(action.equalsIgnoreCase("Login")){
             int record = 0;
-            System.out.println("intento");
             String user = request.getParameter("username");
             String password = request.getParameter("password");
-            System.out.println(user+password);
             if(request.getParameter("combo_box").equals("admin") && session.getAttribute("admin") == null){
                 admin.setUsername(user);
                 admin.setPassword(password);
                 record = adminDAO.validate(admin);
                 access = adminMenu;
                 admin = adminDAO.selectOne(admin);
-                session.setAttribute("admin",admin);
+                session.setAttribute("adminSession",admin);
             }
             else if(request.getParameter("combo_box").equals("recep") && session.getAttribute("recep") == null){
                 receptionist.setUsername(user);
@@ -53,7 +50,7 @@ public class LoginController extends HttpServlet{
                 record = receptionistDAO.validate(receptionist);
                 access = receptionMenu;
                 receptionist = receptionistDAO.selectOne(receptionist);
-                session.setAttribute("recep",receptionist);
+                session.setAttribute("recepSession",receptionist);
             }
             else if(request.getParameter("combo_box").equals("carrier") && session.getAttribute("carrier") == null){
                 carrier.setUsername(user);
@@ -61,7 +58,7 @@ public class LoginController extends HttpServlet{
                 record = carrierDAO.validate(carrier);
                 access = carrierMenu;
                 carrier = carrierDAO.selectOne(carrier);
-                session.setAttribute("carrier",carrier);
+                session.setAttribute("carrierSession",carrier);
             }
             else if(request.getParameter("combo_box").equals("user") && session.getAttribute("user") == null){
                 finalUser.setUsername(user);
@@ -69,7 +66,7 @@ public class LoginController extends HttpServlet{
                 record = finalUserDAO.validate(finalUser);
                 access = userMenu;
                 finalUser = finalUserDAO.selectOne(finalUser);
-                session.setAttribute("user",finalUser);
+                session.setAttribute("userSession",finalUser);
             }
             String error = " ";
             if(record == 0) {
@@ -78,7 +75,6 @@ public class LoginController extends HttpServlet{
                 error = "Error: Datos incorrectos";
                 request.setAttribute("response1",error);
             }
-            System.out.println("record" + record);
         }
         else if(action.equalsIgnoreCase("out")){
             session.invalidate();
@@ -96,18 +92,17 @@ public class LoginController extends HttpServlet{
         String access = "";
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
-        System.out.println("entro doget");
         if(action==null) access=login;
-        if(session.getAttribute("admin") != null){
+        if(session.getAttribute("adminSession") != null){
             access = adminMenu;
         }
-        else if(session.getAttribute("recep") != null){
+        else if(session.getAttribute("recepSession") != null){
             access = receptionMenu;
         }
-        else if(session.getAttribute("carrier") != null){
+        else if(session.getAttribute("carrierSession") != null){
             access = carrierMenu;
         }
-        else if(session.getAttribute("user") != null){
+        else if(session.getAttribute("userSession") != null){
             access = userMenu;
         }
 

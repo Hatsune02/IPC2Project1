@@ -28,6 +28,12 @@ public class FinalUser extends User{
         super(ID, name, username, password, email);
         this.balance = balance;
     }
+    public FinalUser(int ID, String name, String username, String password, String email, double balance,boolean ban,boolean premium) {
+        super(ID, name, username, password, email);
+        this.balance = balance;
+        this.ban = ban;
+        this.premium=premium;
+    }
 
     public double getBalance() {return balance;}
     public void setBalance(double balance) {this.balance = balance;}

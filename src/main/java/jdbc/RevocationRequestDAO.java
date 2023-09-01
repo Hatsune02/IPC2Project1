@@ -1,7 +1,7 @@
 package jdbc;
-import static com.example.demo1.jdbc.Conexion.*;
+import static jdbc.Conexion.*;
 
-import com.example.demo1.entities.objects_process.*;
+import entities.objects_process.*;
 import java.sql.*;
 import java.util.*;
 

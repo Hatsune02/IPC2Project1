@@ -14,27 +14,27 @@
                 <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="#">Home</a>
             </li>
             <li class="nav-item">
-                <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="ReceptionController?action=users" target="myFrame">Gestión de Usuarios</a>
+                <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="ReceptionController?menu=users&action=list" target="myFrame">Gestión de Usuarios</a>
             </li>
             <li class="dropdown">
                 <button style="margin-left: 10px; border: none" class="btn btn-outline-light" type="button" id="dropdownLoanButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Prestamos
                 </button>
                 <div class="dropdown-menu text-center">
-                    <a class="dropdown-item" href="ReceptionController?action=bookLoan" target="myFrame">Libro</a>
-                    <a class="dropdown-item" href="ReceptionController?action=endLoan" target="myFrame">Finalizar Prestamo</a>
+                    <a class="dropdown-item" href="ReceptionController?menu=bookLoan&action=list" target="myFrame">Libro</a>
+                    <a class="dropdown-item" href="ReceptionController?menu=endLoan&action=list" target="myFrame">Finalizar Prestamo</a>
                 </div>
             </li>
             <li class="nav-item">
-                <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="ReceptionController?action=incident" target="myFrame">Incidencia</a>
+                <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="ReceptionController?menu=incident&action=list" target="myFrame">Incidencia</a>
             </li>
             <li class="dropdown">
                 <button style="margin-left: 10px; border: none" class="btn btn-outline-light" type="button" id="dropdownTransportButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Transporte
                 </button>
                 <div class="dropdown-menu text-center">
-                    <a class="dropdown-item" href="ReceptionController?action=transportB" target="myFrame">Pedir Transporte</a>
-                    <a class="dropdown-item" href="ReceptionController?action=applicationT" target="myFrame">Ver Solicitudes</a>
+                    <a class="dropdown-item" href="ReceptionController?menu=transportB&action=list" target="myFrame">Pedir Transporte</a>
+                    <a class="dropdown-item" href="ReceptionController?menu=applicationT&action=list" target="myFrame">Ver Solicitudes</a>
                 </div>
             </li>
         </ul>
@@ -57,7 +57,7 @@
     </div>
 </nav>
 <div class="m-4" style="height: 550px">
-    <iframe name="myFrame" style="height: 100%;width: 100%">
+    <iframe name="myFrame" style="height: 100%;width: 100%;border: none">
 
     </iframe>
 </div>
