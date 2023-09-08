@@ -1,0 +1,59 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    /*background-image: url(../img/miku.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    */
+    background: url(../img/login.png) no-repeat center center fixed;
+    background-size: cover;
+
+}
+#cuadro{
+    width: 330px;
+    background: #090909;
+    color: #ffffff;
+    margin: auto;
+    margin-top: 120px;
+    padding: 5px 5px 30px 5px;
+    border-top: 35px solid #141414;
+    border-right: 35px solid #141414;
+    border-left: 35px solid #141414;
+    border-radius: 6px;
+    opacity: 0.7;
+}
+.entry{
+    width: 320px;
+    height: 35px;
+    border-radius: 6px;
+    font-family: verdana, serif;
+    font-weight: 900;
+}
+#button{
+    width: 324px;
+    height: 45px;
+    border-radius: 6px;
+    background: darkcyan;
+    color: #ffffff;
+    font-size: 15px;
+}
+#box select{
+    width: 320px;
+    height: 35px;
+    font-family: verdana, serif;
+    font-size: 15px;
+}
+#title{
+    font-size: 30px;
+    font-family: fantasy;
+}
+#subtitle1{
+    padding-left: 90px;
+}
+#subtitle2{
+    padding-left: 107px;
+}

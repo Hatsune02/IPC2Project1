@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="demo1:war exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="37d83da8-a836-4b5d-9622-f2e2bb1c99b1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/JsonParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/controller/JSONController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/objects_library/BooksPerLibrary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/reports/BooksLoans.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/reports/CarriersEndTransports.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/reports/Loans30Days.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/reports/Premium.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/reports/ReceptionistEndLoans.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/reports/SuspendedUsers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/reports/Transactions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/reports/UserIncidents.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/ReportsDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/adminOption/reports/report1.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/adminOption/reports/report2.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/adminOption/reports/report3.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/adminOption/reports/report4.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/carrierOption/transportsBOnTheWay.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/carrierOption/transportsUOnTheWay.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/finalUserOption/extra/detailsBook.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/finalUserOption/extra/detailsLoan.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/finalUserOption/extra/loanA1.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/finalUserOption/extra/loanA2.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/finalUserOption/extra/report.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/json/ArchivoEjemplo.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/extra/bookOtherLibs.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/extra/createIncident.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/extra/detailsApplicationT.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/extra/editLoanApplication.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/extra/selectBook.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/extra/selectBooksForTransport.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/extra/showNewLoan.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/reports/report1.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/reports/report2.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/reports/report3.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/reports/report4.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/reports/report5.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/controller/CarrierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/controller/CarrierController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/controller/FinalUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/controller/FinalUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/controller/ReceptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/controller/ReceptionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/objects_library/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/objects_library/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/objects_process/DetailsTransport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/objects_process/DetailsTransport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/objects_process/Loan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/objects_process/Loan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/objects_process/LoanApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/objects_process/LoanApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/objects_process/TransportBetweenLibraries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/objects_process/TransportBetweenLibraries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/objects_process/TransportToUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/entities/objects_process/TransportToUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/AdminDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/AdminDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/BookDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/CarrierDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/CarrierDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/CategoryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/CategoryDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/DetailsTransportDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/DetailsTransportDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/ExistingBooksDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/ExistingBooksDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/FinalUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/FinalUserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/IncidentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/IncidentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/LibraryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/LibraryDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/LoanApplicationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/LoanApplicationDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/LoanDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/LoanDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/ReceptionistDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/ReceptionistDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/RevocationRequestDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/RevocationRequestDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/TransportBetweenLibrariesDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/TransportBetweenLibrariesDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/TransportToUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo1/jdbc/TransportToUserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/admin_menu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/admin_menu.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/carrierOption/transportsB.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/carrierOption/transportsB.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/carrierOption/transportsU.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/carrierOption/transportsU.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/carrier_menu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/carrier_menu.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/finalUserOption/books.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/finalUserOption/books.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/finalUserOption/loanApplication.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/finalUserOption/loanApplication.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/finalUserOption/loans.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/finalUserOption/loans.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/finalUserOption/profile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/finalUserOption/profile.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/finalUserOption/recharge.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/finalUserOption/recharge.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/finalUserOption/revocation.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/finalUserOption/revocation.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/final_user_menu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/final_user_menu.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/receptionOption/applicationT.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/applicationT.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/receptionOption/bookLoan.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/bookLoan.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/receptionOption/endLoan.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/endLoan.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/receptionOption/incident.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/incident.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/receptionOption/transportB.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/receptionOption/transportB.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/receptionist_menu.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/receptionist_menu.jsp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="Jsp File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2U8WHiUwJ9fRAZGE7qdmqQEznr9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/dog/IdeaProjects/demo1/src/main/webapp/root&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.applicationServers&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp/root" />
+      <recent name="$PROJECT_DIR$/src/main/webapp" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/example/demo1" />
+      <recent name="$PROJECT_DIR$/src/main/webapp/img" />
+      <recent name="$PROJECT_DIR$/src/main/webapp/css" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/json" />
+      <recent name="$PROJECT_DIR$/src/main/webapp" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Tomcat 10.1.12" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.12" ALTERNATIVE_JRE_ENABLED="false">
+      <deployment>
+        <artifact name="demo1:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/demo1_war_exploded" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="02f309b2-3963-40f1-a084-0ab7fc35ee7f" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="34591" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="demo1:war exploded" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="37d83da8-a836-4b5d-9622-f2e2bb1c99b1" name="Changes" comment="" />
+      <created>1692321606648</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1692321606648</updated>
+      <workItem from="1692321607649" duration="111000" />
+      <workItem from="1692321767104" duration="11000" />
+      <workItem from="1692322602633" duration="49000" />
+      <workItem from="1692322768026" duration="106000" />
+      <workItem from="1692325451985" duration="273000" />
+      <workItem from="1692645062757" duration="18908000" />
+      <workItem from="1692669553793" duration="3990000" />
+      <workItem from="1692674009265" duration="12562000" />
+      <workItem from="1692738810959" duration="7860000" />
+      <workItem from="1692753346210" duration="16260000" />
+      <workItem from="1692831262477" duration="1416000" />
+      <workItem from="1692909928146" duration="9140000" />
+      <workItem from="1692930593568" duration="8367000" />
+      <workItem from="1692998395420" duration="7681000" />
+      <workItem from="1693008786736" duration="309000" />
+      <workItem from="1693104080386" duration="12990000" />
+      <workItem from="1693170359714" duration="1514000" />
+      <workItem from="1693189917263" duration="18429000" />
+      <workItem from="1693289220973" duration="2241000" />
+      <workItem from="1693291498738" duration="165000" />
+      <workItem from="1693292031269" duration="162000" />
+      <workItem from="1693327521598" duration="8192000" />
+      <workItem from="1693347872900" duration="8498000" />
+      <workItem from="1693415609008" duration="339000" />
+      <workItem from="1693417444185" duration="1843000" />
+      <workItem from="1693432239729" duration="7704000" />
+      <workItem from="1693451562809" duration="10092000" />
+      <workItem from="1693517798491" duration="6939000" />
+      <workItem from="1693532617533" duration="11715000" />
+      <workItem from="1693553117380" duration="5345000" />
+      <workItem from="1693558821287" duration="469000" />
+      <workItem from="1693609763768" duration="4629000" />
+      <workItem from="1693626858796" duration="6478000" />
+      <workItem from="1693704016588" duration="12100000" />
+      <workItem from="1693796326920" duration="9720000" />
+      <workItem from="1693866227090" duration="5771000" />
+      <workItem from="1693890885457" duration="18282000" />
+      <workItem from="1693942330754" duration="38574000" />
+      <workItem from="1694056961409" duration="10850000" />
+      <workItem from="1694105300178" duration="38052000" />
+      <workItem from="1694147129478" duration="75000" />
+      <workItem from="1694147501266" duration="2462000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/demo1$Tomcat_10_1_12.ic" NAME="Tomcat 10.1.12 Coverage Results" MODIFIED="1693551597265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>
